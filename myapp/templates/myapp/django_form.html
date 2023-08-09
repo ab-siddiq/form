@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%load crispy_forms_tags%}
 {%block start%}
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data" style="width:900px;margin:auto">
     {% comment %} enctype="multipart/form-data" => can take anything like image file etc {% endcomment %}
     {%csrf_token%}
     {{form|crispy}}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . forms import contactForm
+from . forms import StudentData
 def home(request):
     return render(request,"./myapp/index.html")
 def about(request):
@@ -28,4 +29,13 @@ def DjangoForm(request):
             return render(request,'./myapp/django_form.html',{'form':form})
     else:
         form = contactForm()
+    return render(request,'./myapp/django_form.html',{'form':form})
+def StudentForm(request):
+    if request.method == 'POST':
+        form = StudentData(request.POST,request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return render(request,'./myapp/django_form.html',{'form':form})
+    else:
+        form = StudentData()
     return render(request,'./myapp/django_form.html',{'form':form})
