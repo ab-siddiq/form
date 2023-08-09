@@ -16,7 +16,16 @@ def submit_form(request):
     return render(request,"./myapp/form.html")
 
 def DjangoForm(request):
-    form = contactForm(request.POST)
-    if form.is_valid():
-        print(form.cleaned_data)
+    if request.method == 'POST':
+        form = contactForm(request.POST,request.FILES)
+        if form.is_valid():
+            file = form.cleaned_data['file']
+            with open('./myapp/upload/' + file.name, 'wb+') as destination:
+                for chunk in file.chunks():
+                    # high reso to low reso
+                    destination.write(chunk)
+            print(form.cleaned_data)
+            return render(request,'./myapp/django_form.html',{'form':form})
+    else:
+        form = contactForm()
     return render(request,'./myapp/django_form.html',{'form':form})
