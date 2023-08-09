@@ -1,9 +1,9 @@
 {%extends 'base.html'%}
-
+{%load crispy_forms_tags%}
 {%block start%}
-<form method="post" action="/about/">
+<form method="POST" action="">
     {%csrf_token%}
-    {{form.as_div}}
-    <button>Submit</button>
+    {{form|crispy}}
+    <button type="submit">Submit</button>
 </form>
 {%endblock%}

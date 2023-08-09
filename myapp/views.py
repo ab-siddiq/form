@@ -16,5 +16,7 @@ def submit_form(request):
     return render(request,"./myapp/form.html")
 
 def DjangoForm(request):
-    form = contactForm()
+    form = contactForm(request.POST)
+    if form.is_valid():
+        print(form.cleaned_data)
     return render(request,'./myapp/django_form.html',{'form':form})
